@@ -47,48 +47,48 @@ def go(args):
         # Ensure artifact is uploaded before destroying temp_csv
         artifact.wait()
 
+
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(description="This step cleans the data")
 
-
     parser.add_argument(
-        "--input_artifact", 
+        "--input_artifact",
         type=str,
         help="Fully-qualitied name for the input artifact",
         required=True
     )
 
     parser.add_argument(
-        "--output_artifact", 
+        "--output_artifact",
         type=str,
         help="Name for the W&B artifact that will be created after cleaning",
         required=True
     )
 
     parser.add_argument(
-        "--output_type", 
+        "--output_type",
         type=str,
         help="Type of the artifact to create",
         required=True
     )
 
     parser.add_argument(
-        "--output_description", 
+        "--output_description",
         type=str,
         help="Description of the artifact to create",
         required=True
     )
 
     parser.add_argument(
-        "--min_price", 
+        "--min_price",
         type=float,
         help="TThe minimum rental price to consider",
         required=True
     )
 
     parser.add_argument(
-        "--max_price", 
+        "--max_price",
         type=float,
         help="The maximum rental price to consider",
         required=True
