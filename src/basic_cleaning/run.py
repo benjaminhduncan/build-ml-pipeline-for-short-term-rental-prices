@@ -18,15 +18,23 @@ def go(args):
     run.config.update(args)
     logger.info("Pulling artifact from W&B")
     artifact_local_path = run.use_artifact(args.input_artifact).file()
+    
     # Form pandas dataframe from csv artifact
     df = pd.read_csv(artifact_local_path)
+    
     # Drop outliers
+    
     logger.info(f"Dropping outliers from artifact")
+    
     idx = df['price'].between(args.min_price, args.max_price)
     df = df[idx].copy()
+    
     # Convert last_review to datetime
     logger.info(f"Converting datatype to datetime")
     df['last_review'] = pd.to_datetime(df['last_review'])
+
+    idx = df['longitude'].between(-74.25, -73.50) & df['latitude'].between(40.5, 41.2)
+    df = df[idx].copy()
 
     # Save csv to temporary location
     with tempfile.NamedTemporaryFile(mode='wb+') as temp_csv:
